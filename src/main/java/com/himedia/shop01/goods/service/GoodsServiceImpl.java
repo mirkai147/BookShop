@@ -15,6 +15,7 @@ import com.himedia.shop01.goods.vo.GoodsVO;
 @Service("goodsService")
 @Transactional(propagation=Propagation.REQUIRED)
 public class GoodsServiceImpl implements GoodsService {
+	
 	@Autowired
 	private GoodsDAO goodsDAO;
 	
@@ -30,6 +31,14 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsList = goodsDAO.selectGoodsList("steadyseller");
 		goodsMap.put("steadyseller", goodsList);
 		
+		return goodsMap;
+	}
+	
+	@Override
+	public Map goodsDetail(String _goods_id) throws Exception {
+		Map goodsMap = new HashMap();
+		GoodsVO goodsVO = goodsDAO.selectGoodsDetail(_goods_id);
+		goodsMap.put("goodsVO", goodsVO);
 		return goodsMap;
 	}
 }

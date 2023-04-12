@@ -20,7 +20,7 @@ import com.himedia.shop01.goods.vo.GoodsVO;
 
 @Controller("mainController")
 @EnableAspectJAutoProxy
-public class MainController extends BaseController{
+public class MainController extends BaseController {	
 	@Autowired
 	private GoodsService goodsService;
 	
@@ -36,6 +36,5 @@ public class MainController extends BaseController{
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}
-	
-	
+
 }
