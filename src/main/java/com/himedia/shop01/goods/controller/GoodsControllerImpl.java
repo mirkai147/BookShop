@@ -13,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.himedia.shop01.common.base.BaseController;
 import com.himedia.shop01.goods.service.GoodsService;
 import com.himedia.shop01.goods.vo.GoodsVO;
+
+import net.sf.json.JSONObject;
 
 @Controller("goodsController")
 @RequestMapping(value = "/goods")
@@ -37,6 +40,34 @@ public class GoodsControllerImpl extends BaseController implements GoodsControll
 		mav.addObject("goodsMap", goodsMap);
 		GoodsVO goodsVO = (GoodsVO) goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id, goodsVO, session);
+		return mav;
+	}
+	
+//	@Override
+	@RequestMapping(value = "/keywordSearch.do", method = RequestMethod.GET, produces = "application/text; charset=utf-8")
+	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
+		
+		if(keyword == null || keyword.equals("")) {
+			return null;
+		}
+		keyword = keyword.toUpperCase();	//Converts all of the characters in this String to uppercase using the rules of the default locale. This method is equivalent to toUpperCase(Locale.getDefault()). 
+		List keywordList = goodsService.keywordSearch(keyword);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("keyword", keywordList);
+		String jsonInfo = jsonObject.toString();
+		return jsonInfo;
+	}
+	
+	@RequestMapping(value = "/searchGoods.do", method = RequestMethod.GET)
+	public ModelAndView searchGoods(@RequestParam("searchWord") String searchWord,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		List goodsList = goodsService.searchGoods(searchWord);
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("goodsList", goodsList);		
 		return mav;
 	}
 

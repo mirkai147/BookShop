@@ -69,5 +69,24 @@
 			and goods_id=#{goods_id}
 		]]>
 	</select>
+	
+	<select id="selectGoodsBySearchWord" parameterType="String" resultMap="goodsResult">
+		<![CDATA[
+			select g.*, d.fileName from t_shopping_goods g, t_goods_detail_image d
+			where g.goods_id=d.goods_id
+			and d.fileType='main_image'
+			and g.goods_title like '%' || #{searchWord} || '%'
+			order by g.goods_creDate desc
+		]]>
+	</select>
+	
+	<select id="selectKeywordSearch" parameterType="String" resultType="String">
+		<![CDATA[
+			select goods_title from t_shopping_goods
+			where
+			goods_title like '%' || #{keyword} || '%'
+			order by goods_creDate desc
+		]]>
+	</select>
 
 </mapper>	

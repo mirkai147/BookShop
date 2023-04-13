@@ -1,5 +1,6 @@
 package com.himedia.shop01.goods.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,5 +41,17 @@ public class GoodsServiceImpl implements GoodsService {
 		GoodsVO goodsVO = goodsDAO.selectGoodsDetail(_goods_id);
 		goodsMap.put("goodsVO", goodsVO);
 		return goodsMap;
+	}
+	
+	@Override
+	public List searchGoods(String keyword) throws Exception {
+		List keywordList = goodsDAO.selectGoodsBySearchWord(keyword);
+		return keywordList;
+	}
+	
+	@Override
+	public List keywordSearch(String keyword) throws Exception {
+		List keywordList = goodsDAO.selectKeywordSearch(keyword);
+		return keywordList;
 	}
 }

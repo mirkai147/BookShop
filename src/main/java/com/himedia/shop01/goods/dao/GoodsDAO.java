@@ -15,4 +15,10 @@ public interface GoodsDAO {
 
 	public List<ImageFileVO> selectGoodsDetailImage(String goods_id) throws DataAccessException;
 
+	public List<GoodsVO> selectGoodsBySearchWord(String keyword) throws DataAccessException;
+	
+	public List<GoodsVO> selectKeywordSearch(String goods_id) throws DataAccessException;
+
+	
+
 }
