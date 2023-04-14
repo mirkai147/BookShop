@@ -8,9 +8,11 @@ import com.himedia.shop01.member.vo.MemberVO;
 
 public interface MemberDAO {
 
-	MemberVO login(Map login) throws DataAccessException;
+	public MemberVO login(Map login) throws DataAccessException;
 
-	String selectOverlappedID(String id) throws DataAccessException;
+	public String selectOverlappedID(String id) throws DataAccessException;
+
+	public void insertNewMember(MemberVO memberVO) throws DataAccessException;
 
 	
 }

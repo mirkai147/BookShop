@@ -12,4 +12,6 @@ public interface MemberService {
 
 	public String overlapped(String id) throws Exception;
 
+	public void addMember(MemberVO memberVO) throws Exception;
+
 }
