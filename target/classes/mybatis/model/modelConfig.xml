@@ -7,5 +7,6 @@
 		<typeAlias type="com.himedia.shop01.goods.vo.GoodsVO"  alias="goodsVO" />
 		<typeAlias type="com.himedia.shop01.goods.vo.ImageFileVO"  alias="imageFileVO" />
 		<typeAlias type="com.himedia.shop01.member.vo.MemberVO"  alias="memberVO" />
+		<typeAlias type="com.himedia.shop01.cart.vo.CartVO"  alias="cartVO" />
 	</typeAliases>
 </configuration>

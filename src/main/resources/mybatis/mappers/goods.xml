@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.goods">
 <!-- resultMap 정의 -->
-	<resultMap type="goodsVO" id="goodsResult">
+	<resultMap type="GoodsVO" id="goodsResult">
 		<result property="goods_id" column="goods_id" />
 		<result property="goods_title" column="goods_title" />
 		<result property="goods_writer" column="goods_writer" />
