@@ -16,7 +16,7 @@ import com.himedia.shop01.cart.vo.CartVO;
 import com.himedia.shop01.common.base.BaseController;
 import com.himedia.shop01.member.vo.MemberVO;
 
-@Controller("CartController")
+@Controller("cartController")
 @RequestMapping(value = "/cart")
 public class CartControllerImpl extends BaseController implements CartController {
 
@@ -35,8 +35,7 @@ public class CartControllerImpl extends BaseController implements CartController
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
-		cartVO.setCart_id(goods_id);
-		cartVO.setMember_id(member_id);
+		cartVO.setGoods_id(goods_id);
 		boolean isAreadyExisted = cartService.findCartGoods(cartVO);
 		System.out.println("isAreadyExisted:"+isAreadyExisted);
 		if(isAreadyExisted==true) {
