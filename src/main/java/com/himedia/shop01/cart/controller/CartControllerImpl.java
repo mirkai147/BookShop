@@ -1,5 +1,8 @@
 package com.himedia.shop01.cart.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.himedia.shop01.cart.service.CartService;
 import com.himedia.shop01.cart.vo.CartVO;
@@ -26,6 +30,20 @@ public class CartControllerImpl extends BaseController implements CartController
 	private CartVO cartVO;
 	@Autowired
 	private MemberVO memberVO;
+	
+	@Override
+	@RequestMapping(value = "/myCartList.do", method = RequestMethod.GET)
+	public ModelAndView myCartMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		cartVO.setMember_id(member_id);
+		Map<String, List> cartMap = cartService.myCartList(cartVO);
+		session.setAttribute("cartMap", cartMap);
+		return mav;
+	}
 	
 	@Override
 	@RequestMapping(value = "/addGoodsInCart.do", method = RequestMethod.POST, produces = "application/text; charset=utf-8")
