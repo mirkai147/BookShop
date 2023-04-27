@@ -22,4 +22,16 @@ public class OrderServiceImpl implements OrderService {
 		orderDAO.insertNewOrder(myOrderList);
 		orderDAO.removeGoodsFromCart(myOrderList);
 	}
+	
+	@Override
+	public List<OrderVO> listMyOrderGoods(OrderVO orderVO) throws Exception{
+		List<OrderVO> orderGoodsList;
+		orderGoodsList=orderDAO.listMyOrderGoods(orderVO);
+		return orderGoodsList;
+	}
+	
+	@Override
+	public OrderVO findMyOrder(String order_id) throws Exception{
+		return orderDAO.findMyOrder(order_id);
+	}
 }

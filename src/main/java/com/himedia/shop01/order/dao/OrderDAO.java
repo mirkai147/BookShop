@@ -12,4 +12,12 @@ public interface OrderDAO {
 
 	public void removeGoodsFromCart(List<OrderVO> myOrderList) throws DataAccessException;
 
+	public void removeGoodsFromCart(OrderVO orderVO) throws DataAccessException;
+
+	public OrderVO findMyOrder(String order_id) throws DataAccessException;
+
+	public int selectOrderID() throws DataAccessException;
+
+	public List<OrderVO> listMyOrderGoods(OrderVO orderVO) throws DataAccessException;
+
 }

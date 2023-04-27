@@ -8,4 +8,8 @@ public interface OrderService {
 
 	public void addNewOrder(List<OrderVO> myOrderList) throws Exception;
 
+	List<OrderVO> listMyOrderGoods(OrderVO orderVO) throws Exception;
+
+	OrderVO findMyOrder(String order_id) throws Exception;
+
 }
