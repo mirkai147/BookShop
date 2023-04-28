@@ -9,5 +9,6 @@
 		<typeAlias type="com.himedia.shop01.member.vo.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.himedia.shop01.cart.vo.CartVO"  alias="cartVO" />
 		<typeAlias type="com.himedia.shop01.order.vo.OrderVO"  alias="orderVO" />
+		<typeAlias type="com.himedia.shop01.mypage.vo.MyPageVO"  alias="mypageVO" />
 	</typeAliases>
 </configuration>

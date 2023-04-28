@@ -38,7 +38,7 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		session = request.getSession();
+//		session = request.getSession();
 		
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 		String action = (String) session.getAttribute("action");
