@@ -3,6 +3,7 @@ package com.himedia.shop01.mypage.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface MyPageController {
@@ -11,5 +12,8 @@ public interface MyPageController {
 
 	public ModelAndView cancelMyOrder(String order_id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
+
+	public ResponseEntity modifyMyInfo(String attribute, String value, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
 
 }
