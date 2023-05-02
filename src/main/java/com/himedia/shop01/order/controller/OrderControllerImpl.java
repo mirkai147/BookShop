@@ -1,6 +1,7 @@
 package com.himedia.shop01.order.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.himedia.shop01.common.base.BaseController;
 import com.himedia.shop01.goods.vo.GoodsVO;
 import com.himedia.shop01.member.vo.MemberVO;
+import com.himedia.shop01.order.service.ApiService01;
 import com.himedia.shop01.order.service.OrderService;
 import com.himedia.shop01.order.vo.OrderVO;
 
@@ -31,6 +33,12 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	
 	@Autowired
 	private OrderVO orderVO;
+
+//	@Autowired
+//	private ApiService apiService;
+	
+	@Autowired
+	private ApiService01 apiService01;
 	
 	@Override
 	@RequestMapping(value = "/orderEachGoods.do", method = RequestMethod.POST)
@@ -75,6 +83,90 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		//
+		System.out.println("확인 : " + receiverMap.toString());
+		
+		//확인 :{receiver_name=홍길동, receiver_hp1=010, receiver_hp2=1234, receiver_hp3=1234, receiver_tel1=, receiver_tel2=, receiver_tel3=, delivery_address=우편번호:13637<br>도로명 주소:경기 성남시 분당구 성남대로 36 (구미동)<br>[지번 주소:경기 성남시 분당구 구미동 185-2]<br>5층, delivery_message=, delivery_method=일반택배, gift_wrapping=no, pay_method=신용카드<Br>카드사:삼성<br>할부개월수:일시불, card_com_name=삼성, card_pay_month=일시불, pay_orderer_hp_num=해당없음, p_card_num=1234, p_card_month=12, p_card_year=2222, p_card_birth=2222-12-12, p_card_pwd=12}
+		
+		//결제승인요청변수
+		String merchantId = "";
+		String orderNumber = "";
+		String cardNo = "";
+		String expireMonth = "";
+		String expireYear = "";
+		String birthday = "";
+		String cardPw = "";
+		String amount = "";
+		String quota = "";
+		String itemName = "";
+		String userName = "";
+		String signature = "";
+		String timestamp = "";
+		String apiCertKey = "";
+		
+		//값 셋팅
+		merchantId = "himedia"; //가맹점 아이디
+		apiCertKey = "ac805b30517f4fd08e3e80490e559f8e";	//api 인증키
+		orderNumber = "TEST_choi1234"; 		//주문번호 생성
+		cardNo = receiverMap.get("p_card_num");	//화면에서 받은 값
+		expireMonth = receiverMap.get("p_card_month");
+		expireYear = receiverMap.get("p_card_year");
+		birthday = receiverMap.get("p_card_birth");
+		cardPw = receiverMap.get("p_card_pwd");
+		amount = "1000";
+		quota = "0";	//일시불
+		itemName = "책";	
+		userName = "하이미디어";
+		timestamp = "20230501112700";
+		signature = apiService01.encrypt(merchantId+"|"+orderNumber+"|"+amount+"|"+apiCertKey+"|"+timestamp); //서명값
+		
+		//rest api를 라이브러리 써서 사용
+		//가장 평범한 통신은 httpURLconnection 으로 하는 통신 (X)
+		String url = "https://api.testpayup.co.kr/v2/api/payment/"+merchantId+"/keyin2";
+		Map<String,String> map = new HashMap<String, String>();
+		Map<String,Object> returnMap = new HashMap<String, Object>();
+		
+		//map에다가 요청데이터값을 넣으면 됩니다.
+		map.put("merchantId", merchantId);
+		map.put("cardNo", cardNo);
+		map.put("quota", quota);
+		map.put("orderNumber", orderNumber);
+		map.put("expireMonth", expireMonth);
+		map.put("expireYear", expireYear);
+		map.put("birthday", birthday);
+		map.put("cardPw", cardPw);
+		map.put("amount", amount);
+		map.put("itemName", itemName);
+		map.put("userName", userName);
+		map.put("signature", signature);
+		map.put("timestamp", timestamp);
+		
+		returnMap = apiService01.restApi(map, url);
+		
+		System.out.println("카드결제 승인 응답 데이터 = " + returnMap.toString());
+		
+		//응답값을 잘 받으면
+		
+		//승인 성공 or 실패
+		String responseCode = (String) returnMap.get("responseCode");
+		String responseMsg = (String) returnMap.get("responseMsg");
+		mav.addObject("responseCode", responseCode);
+		mav.addObject("responseMsg", responseMsg);
+		
+		// "0000" == responseCode <<(X)
+		if("0000".equals(responseCode)) {
+			//성공
+			//페이지 설정
+			
+			
+		}else {
+			//실패
+			//페이지 설정
+			
+		}
+		
+		//결제하기 끝
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("orderer");
