@@ -437,7 +437,7 @@ function fn_show_order_detail(){
 		
 	}
 	
-	return ; //아래 실행 안되게 하는중
+	//return ; //아래 실행 안되게 하는중
 	
 	
 	goods_id="";
