@@ -1,6 +1,7 @@
 package com.himedia.shop01.admin.goods.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.himedia.shop01.admin.goods.dao.AdminGoodsDAO;
+import com.himedia.shop01.goods.vo.GoodsVO;
 import com.himedia.shop01.goods.vo.ImageFileVO;
 
 @Service
@@ -27,5 +29,10 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 		}
 		adminGoodsDAO.insertGoodsImageFile(imageFileList);
 		return goods_id;
+	}
+	
+	@Override
+	public List<GoodsVO> listNewGoods(Map condMap) throws Exception {
+		return adminGoodsDAO.selectNewGoodsList(condMap);
 	}
 }
