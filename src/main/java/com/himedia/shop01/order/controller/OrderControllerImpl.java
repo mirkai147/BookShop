@@ -85,11 +85,11 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		ModelAndView mav = new ModelAndView(viewName);
 		
 		//
-		System.out.println("È®ÀÎ : " + receiverMap.toString());
+		System.out.println("í™•ì¸ : " + receiverMap.toString());
 		
-		//È®ÀÎ :{receiver_name=È«±æµ¿, receiver_hp1=010, receiver_hp2=1234, receiver_hp3=1234, receiver_tel1=, receiver_tel2=, receiver_tel3=, delivery_address=¿ìÆí¹øÈ£:13637<br>µµ·Î¸í ÁÖ¼Ò:°æ±â ¼º³²½Ã ºĞ´ç±¸ ¼º³²´ë·Î 36 (±¸¹Ìµ¿)<br>[Áö¹ø ÁÖ¼Ò:°æ±â ¼º³²½Ã ºĞ´ç±¸ ±¸¹Ìµ¿ 185-2]<br>5Ãş, delivery_message=, delivery_method=ÀÏ¹İÅÃ¹è, gift_wrapping=no, pay_method=½Å¿ëÄ«µå<Br>Ä«µå»ç:»ï¼º<br>ÇÒºÎ°³¿ù¼ö:ÀÏ½ÃºÒ, card_com_name=»ï¼º, card_pay_month=ÀÏ½ÃºÒ, pay_orderer_hp_num=ÇØ´ç¾øÀ½, p_card_num=1234, p_card_month=12, p_card_year=2222, p_card_birth=2222-12-12, p_card_pwd=12}
+		//í™•ì¸ :{receiver_name=í™ê¸¸ë™, receiver_hp1=010, receiver_hp2=1234, receiver_hp3=1234, receiver_tel1=, receiver_tel2=, receiver_tel3=, delivery_address=ìš°í¸ë²ˆí˜¸:13637<br>ë„ë¡œëª… ì£¼ì†Œ:ê²½ê¸° ì„±ë‚¨ì‹œ ë¶„ë‹¹êµ¬ ì„±ë‚¨ëŒ€ë¡œ 36 (êµ¬ë¯¸ë™)<br>[ì§€ë²ˆ ì£¼ì†Œ:ê²½ê¸° ì„±ë‚¨ì‹œ ë¶„ë‹¹êµ¬ êµ¬ë¯¸ë™ 185-2]<br>5ì¸µ, delivery_message=, delivery_method=ì¼ë°˜íƒë°°, gift_wrapping=no, pay_method=ì‹ ìš©ì¹´ë“œ<Br>ì¹´ë“œì‚¬:ì‚¼ì„±<br>í• ë¶€ê°œì›”ìˆ˜:ì¼ì‹œë¶ˆ, card_com_name=ì‚¼ì„±, card_pay_month=ì¼ì‹œë¶ˆ, pay_orderer_hp_num=í•´ë‹¹ì—†ìŒ, p_card_num=1234, p_card_month=12, p_card_year=2222, p_card_birth=2222-12-12, p_card_pwd=12}
 		
-		//°áÁ¦½ÂÀÎ¿äÃ»º¯¼ö
+		//ê²°ì œìŠ¹ì¸ìš”ì²­ë³€ìˆ˜
 		String merchantId = "";
 		String orderNumber = "";
 		String cardNo = "";
@@ -105,29 +105,29 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		String timestamp = "";
 		String apiCertKey = "";
 		
-		//°ª ¼ÂÆÃ
-		merchantId = "himedia"; //°¡¸ÍÁ¡ ¾ÆÀÌµğ
-		apiCertKey = "ac805b30517f4fd08e3e80490e559f8e";	//api ÀÎÁõÅ°
-		orderNumber = "TEST_choi1234"; 		//ÁÖ¹®¹øÈ£ »ı¼º
-		cardNo = receiverMap.get("p_card_num");	//È­¸é¿¡¼­ ¹ŞÀº °ª
+		//ê°’ ì…‹íŒ…
+		merchantId = "himedia"; //ê°€ë§¹ì  ì•„ì´ë””
+		apiCertKey = "ac805b30517f4fd08e3e80490e559f8e";	//api ì¸ì¦í‚¤
+		orderNumber = "TEST_choi1234"; 		//ì£¼ë¬¸ë²ˆí˜¸ ìƒì„±
+		cardNo = receiverMap.get("p_card_num");	//í™”ë©´ì—ì„œ ë°›ì€ ê°’
 		expireMonth = receiverMap.get("p_card_month");
 		expireYear = receiverMap.get("p_card_year");
 		birthday = receiverMap.get("p_card_birth");
 		cardPw = receiverMap.get("p_card_pwd");
 		amount = "1000";
-		quota = "0";	//ÀÏ½ÃºÒ
-		itemName = "Ã¥";	
-		userName = "ÇÏÀÌ¹Ìµğ¾î";
+		quota = "0";	//ì¼ì‹œë¶ˆ
+		itemName = "ì±…";	
+		userName = "í•˜ì´ë¯¸ë””ì–´";
 		timestamp = "20230501112700";
-		signature = apiService01.encrypt(merchantId+"|"+orderNumber+"|"+amount+"|"+apiCertKey+"|"+timestamp); //¼­¸í°ª
+		signature = apiService01.encrypt(merchantId+"|"+orderNumber+"|"+amount+"|"+apiCertKey+"|"+timestamp); //ì„œëª…ê°’
 		
-		//rest api¸¦ ¶óÀÌºê·¯¸® ½á¼­ »ç¿ë
-		//°¡Àå Æò¹üÇÑ Åë½ÅÀº httpURLconnection À¸·Î ÇÏ´Â Åë½Å (X)
+		//rest apië¥¼ ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¨ì„œ ì‚¬ìš©
+		//ê°€ì¥ í‰ë²”í•œ í†µì‹ ì€ httpURLconnection ìœ¼ë¡œ í•˜ëŠ” í†µì‹  (X)
 		String url = "https://api.testpayup.co.kr/v2/api/payment/"+merchantId+"/keyin2";
 		Map<String,String> map = new HashMap<String, String>();
 		Map<String,Object> returnMap = new HashMap<String, Object>();
 		
-		//map¿¡´Ù°¡ ¿äÃ»µ¥ÀÌÅÍ°ªÀ» ³ÖÀ¸¸é µË´Ï´Ù.
+		//mapì—ë‹¤ê°€ ìš”ì²­ë°ì´í„°ê°’ì„ ë„£ìœ¼ë©´ ë©ë‹ˆë‹¤.
 		map.put("merchantId", merchantId);
 		map.put("cardNo", cardNo);
 		map.put("quota", quota);
@@ -144,11 +144,11 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		returnMap = apiService01.restApi(map, url);
 		
-		System.out.println("Ä«µå°áÁ¦ ½ÂÀÎ ÀÀ´ä µ¥ÀÌÅÍ = " + returnMap.toString());
+		System.out.println("ì¹´ë“œê²°ì œ ìŠ¹ì¸ ì‘ë‹µ ë°ì´í„° = " + returnMap.toString());
 		
-		//ÀÀ´ä°ªÀ» Àß ¹ŞÀ¸¸é
+		//ì‘ë‹µê°’ì„ ì˜ ë°›ìœ¼ë©´
 		
-		//½ÂÀÎ ¼º°ø or ½ÇÆĞ
+		//ìŠ¹ì¸ ì„±ê³µ or ì‹¤íŒ¨
 		String responseCode = (String) returnMap.get("responseCode");
 		String responseMsg = (String) returnMap.get("responseMsg");
 		mav.addObject("responseCode", responseCode);
@@ -156,17 +156,17 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		// "0000" == responseCode <<(X)
 		if("0000".equals(responseCode)) {
-			//¼º°ø
-			//ÆäÀÌÁö ¼³Á¤
+			//ì„±ê³µ
+			//í˜ì´ì§€ ì„¤ì •
 			
 			
 		}else {
-			//½ÇÆĞ
-			//ÆäÀÌÁö ¼³Á¤
+			//ì‹¤íŒ¨
+			//í˜ì´ì§€ ì„¤ì •
 			
 		}
 		
-		//°áÁ¦ÇÏ±â ³¡
+		//ê²°ì œí•˜ê¸° ë
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("orderer");

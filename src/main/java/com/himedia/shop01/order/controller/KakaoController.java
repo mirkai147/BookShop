@@ -21,11 +21,11 @@ public class KakaoController {
 	public Map<String,Object> kakaoOrder(@RequestParam Map<String, String> dateMap) throws Exception{
 		
 		
-		System.out.println("µé¾î¿À´Â µ¥ÀÌÅÍ = " + dateMap.toString());
+		System.out.println("ë“¤ì–´ì˜¤ëŠ” ë°ì´í„° = " + dateMap.toString());
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		
-		//ÁÖ¹® ¿¬µ¿ ÇÏ±â
-		String id = "himedia"; //¹ß±ŞµÈ °èÁ¤
+		//ì£¼ë¬¸ ì—°ë™ í•˜ê¸°
+		String id = "himedia"; //ë°œê¸‰ëœ ê³„ì •
 		String base = "https://api.testpayup.co.kr";
 		String path = "/ep/api/kakao/"+id+"/order";
 		
@@ -33,15 +33,15 @@ public class KakaoController {
 		
 		String signature = ""; 
 		
-		//ÆÄ¶ó¹ÌÅÍ·Î »ç¿ëÇÒ ¸Ê
+		//íŒŒë¼ë¯¸í„°ë¡œ ì‚¬ìš©í•  ë§µ
 		Map<String,String> map = new HashMap<String,String>();
-		map.put("orderNumber","TEST_12346"); //ÁÖ¹®µ¥ÀÌÅÍ »ı¼ºÇØ¾ßÁö »ı±â´Â Å°°ª (»ı¼ºÀ» ¾ÈÇØ¼­ ÀÓÀÇ°ª)
-//		map.put("amount",dateMap.get("amount")); //È­¸é¿¡¼­ ¹Ş¾Æ¿Â °ª
-		map.put("amount","100"); //È­¸é¿¡¼­ ¹Ş¾Æ¿Â °ª (Å×½ºÆ®¸¦ À§ÇØ¼­ 100¿ø °íÁ¤)
-		map.put("itemName",dateMap.get("itemName")); //È­¸é¿¡¼­ ¹Ş¾Æ¿Â °ª
-//		map.put("userName",dateMap.get("userName")); //È­¸é¿¡¼­ ¹Ş¾Æ¿Â °ª
-		map.put("userName","Å×½ºÆ®Áß"); //(Å×½ºÆ®¸¦ À§ÇØ¼­ °íÁ¤)
-		map.put("returnUrl","naver.com");//PC¿¡¼­´Â ¾ÈÁß¿äÇÔ
+		map.put("orderNumber","TEST_12346"); //ì£¼ë¬¸ë°ì´í„° ìƒì„±í•´ì•¼ì§€ ìƒê¸°ëŠ” í‚¤ê°’ (ìƒì„±ì„ ì•ˆí•´ì„œ ì„ì˜ê°’)
+//		map.put("amount",dateMap.get("amount")); //í™”ë©´ì—ì„œ ë°›ì•„ì˜¨ ê°’
+		map.put("amount","100"); //í™”ë©´ì—ì„œ ë°›ì•„ì˜¨ ê°’ (í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•´ì„œ 100ì› ê³ ì •)
+		map.put("itemName",dateMap.get("itemName")); //í™”ë©´ì—ì„œ ë°›ì•„ì˜¨ ê°’
+//		map.put("userName",dateMap.get("userName")); //í™”ë©´ì—ì„œ ë°›ì•„ì˜¨ ê°’
+		map.put("userName","í…ŒìŠ¤íŠ¸ì¤‘"); //(í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•´ì„œ ê³ ì •)
+		map.put("returnUrl","naver.com");//PCì—ì„œëŠ” ì•ˆì¤‘ìš”í•¨
 		map.put("timestamp","1000");
 		map.put("userAgent","WP");
 		
@@ -49,7 +49,7 @@ public class KakaoController {
 		
 		map.put("signature",signature);
 		resultMap = apiService01.restApi(map, url);
-		System.out.println("³ª°¡´Â µ¥ÀÌÅÍ = " + resultMap.toString());
+		System.out.println("ë‚˜ê°€ëŠ” ë°ì´í„° = " + resultMap.toString());
 		
 		return resultMap;
 	}

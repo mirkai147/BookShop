@@ -29,8 +29,8 @@ public class KakaoController2 {
 // {ordr_idxx=20230502102210KK0644, good_name=????? ??????, good_mny=100, buyr_name=??????, site_cd=A8QOB, req_tx=pay, pay_method=100000000000, currency=410, kakaopay_direct=Y, module_type=01, ordr_chk=20230502102210KK0644|100, param_opt_1=, param_opt_2=, param_opt_3=, res_cd=0000, res_msg=????, enc_info=2n07b4sjVhu573QZVVa6xpRW1NWxiaeefRee2h2AuZFmnpNJfBFzTkqek0sRSJQRS8b3ZsmND9l7tY8AHU.pLCG3I4BNhhF0iAaQCzZJ2Ri2L82NxlzMdY-2K79yFOC3Ggoj6QbIicoF9HiENzDRbgzRMAK0BiOzRNn2.s4bg8ktMTDf0wCYorliQntxP5b0z3JRNwPd-ZJ__, enc_data=4B0en.FInO56Ed1YcnThGg7mYs3eUJ8LxZPoAjrUpgpLllBnPHri7KylfEdH9G0hArSZx.QWtinco9AN0Qj96IrBI1wbooV9US82oCgF6O8EaKWHuGTb8Ih4g9wgDyn6sMiGX4J1JXsoKAJxT93ah7ujDvFNrNbfZ64OzRD3DfSnl1WItvyRMW-2Y44O6LjOJOfK0-nUCR0Al5nauhUP8Cm76OmZPz1DbbPvoOyRk2zlDbyurSN6kBjNYx.VhsEVhq4CG5oUMARZXLI6Hy8puYjhOqVFYnLY2uHhsbH0ObFzd-3tff6sHoLPFpNExPMdaUSUSx6xQ10gPXoFD68qM0HSdfI.5c52i01MIGkcY07rWfqgs90pS4MVrCTinySBEc--nwQLX4xW0aCkK2tW8Zpw33HeP9Fekdq0.734S.uAflEqOcbF86wqWLdQFbDe4O6gEV3Y9MLnyKae2aovH0vjhAMk2AGi5MpueZoNSkuj.zYhi2B2waxhmATe5XcCgCjZr.RITM1MiMo5IyJay6BX5xZPv9JTg58.HKRmT1fQWaudHlvvK57T76EraU9TAbnMm5I.3uiMHtxWvwXxPho7DS9aDlENkwq5ujgn-4-WX6YUB2C0PHybsFg5DMwhm6sLtMeaqj8v9ws3wlWPMUM9HLd.IzreFHrwBKS02K8TCmk0EVWHTY8dMUdvS06OGj23iMoEWNfEA3qhIxGyCjax6aIdG2guW4WrMb-vMp82zznid5ls9yC8rq3kdl1.JkEpDzg.gIB-ILsxNCYFWxHQ3DY25M1tLu6-wqzT8GJN_, ret_pay_method=CARD, tran_cd=00100000, use_pay_method=100000000000, card_pay_method=KAKAO_CARD}
 
 		
-		//4. ÀÎÁõ µ¥ÀÌÅÍ·Î °áÁ¦ ¿äÃ»ÇÏ±â (rest api »ç¿ë)
-		// ³»°¡ api Åë½Å½Ã º¸³»¾ßµÇ´Â(¿äÃ») µ¥ÀÌÅÍ ³ª¿­
+		//4. ì¸ì¦ ë°ì´í„°ë¡œ ê²°ì œ ìš”ì²­í•˜ê¸° (rest api ì‚¬ìš©)
+		// ë‚´ê°€ api í†µì‹ ì‹œ ë³´ë‚´ì•¼ë˜ëŠ”(ìš”ì²­) ë°ì´í„° ë‚˜ì—´
 		String res_cd = map.get("res_cd");
 		String enc_info = map.get("enc_info");
 		String enc_data = map.get("enc_data");
@@ -46,21 +46,21 @@ public class KakaoController2 {
 		dataMap.put("card_pay_method", card_pay_method);
 		dataMap.put("ordr_idxx", ordr_idxx);
 		
-		//ÁÖ¹® ¿¬µ¿ ÇÏ±â
-		String id = "himedia"; //¹ß±ŞµÈ °èÁ¤
+		//ì£¼ë¬¸ ì—°ë™ í•˜ê¸°
+		String id = "himedia"; //ë°œê¸‰ëœ ê³„ì •
 		String base = "https://api.testpayup.co.kr";
 		String path = "/ep/api/kakao/"+id+"/pay";
 		
 		String url = base+path;
 				
-		//apiService01.restApi(/*¿©±â¿¡ ¸Ê(¿äÃ»°ªµéÀÌ µé¾îÀÖ¾î¾ßÇÔ)*/ dataMap, /*URL (Ç® URL)*/ url);
+		//apiService01.restApi(/*ì—¬ê¸°ì— ë§µ(ìš”ì²­ê°’ë“¤ì´ ë“¤ì–´ìˆì–´ì•¼í•¨)*/ dataMap, /*URL (í’€ URL)*/ url);
 		Map<String,Object> resultMap = apiService01.restApi(dataMap, url);
 		
-		System.out.println("Ä«Ä«¿ÀÆäÀÌ °áÁ¦ ÀÀ´ä = " + resultMap.toString());
+		System.out.println("ì¹´ì¹´ì˜¤í˜ì´ ê²°ì œ ì‘ë‹µ = " + resultMap.toString());
 		
-		//view ¼³Á¤
-		//½ÂÀÎ ¼º°ø or ½ÇÆĞ
-//		String responseCode = "0000"; //Å×½ºÆ®
+		//view ì„¤ì •
+		//ìŠ¹ì¸ ì„±ê³µ or ì‹¤íŒ¨
+//		String responseCode = "0000"; //í…ŒìŠ¤íŠ¸
 		String responseCode = (String) resultMap.get("responseCode");
 		String responseMsg = (String) resultMap.get("responseMsg");
 		String authDateTime = (String) resultMap.get("authDateTime");
@@ -75,12 +75,12 @@ public class KakaoController2 {
 				
 		// "0000" == responseCode <<(X)
 		if("0000".equals(responseCode) || responseCode.equals("0000")) {
-			//¼º°ø
-			//ÆäÀÌÁö ¼³Á¤
+			//ì„±ê³µ
+			//í˜ì´ì§€ ì„¤ì •
 			mav.setViewName("/kakao/kakaoResult");
 		}else {
-			//½ÇÆĞ
-			//ÆäÀÌÁö ¼³Á¤
+			//ì‹¤íŒ¨
+			//í˜ì´ì§€ ì„¤ì •
 			mav.setViewName("/kakao/kakaoResultFail");
 		}
 		

@@ -75,7 +75,7 @@ public class AdminGoodsControllerImpl extends BaseController implements AdminGoo
 				}
 			}
 			message = "<script>";
-			message+= " alert('»õ »óÇ°À» Ãß°¡Çß½À´Ï´Ù.');";
+			message+= " alert('ìƒˆ ìƒí’ˆì„ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤.');";
 			message+= " location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 		} catch (Exception e) {
@@ -88,7 +88,7 @@ public class AdminGoodsControllerImpl extends BaseController implements AdminGoo
 			}
 			
 			message = "<script>";
-			message+= " alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä.');";
+			message+= " alert('ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”.');";
 			message+= " location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 			e.printStackTrace();
