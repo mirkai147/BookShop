@@ -17,4 +17,10 @@ public interface AdminGoodsController {
 	public ResponseEntity addNewGoods(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
 
+	public ModelAndView modifyGoodsForm(int goods_id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
+
+	public ResponseEntity modifyGoodsInfo(String goods_id, String attribute, String value, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
 }

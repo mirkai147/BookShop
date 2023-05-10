@@ -186,14 +186,85 @@
 		]]>
 	</select>
 	
-	<select id="selectGoodsDetailImage" parameterType="String" resultMap="imageResult">
+	<select id="selectGoodsImageFileList" parameterType="String" resultMap="imageResult">
 		<![CDATA[
 			select * from t_goods_detail_image
 			where
-			fileType!='main_image'
-			and goods_id=#{goods_id}
+			goods_id=#{goods_id}
+			order by image_id asc
 		]]>
 	</select>
+	
+	<update id="updateGoodsInfo" parameterType="java.util.HashMap">
+		update t_shopping_goods
+		<set>
+			<choose>
+				<when test=" goods_sort!='' and goods_sort!=null">
+	        		goods_sort=#{goods_sort},
+		      	</when>
+		      	<when test=" goods_title!='' and goods_title!=null">
+		        	goods_title=#{goods_title},
+		      	</when>
+		      	<when test=" goods_writer!='' and goods_writer!=null">
+		        	goods_writer=#{goods_writer},
+		      	</when>
+		      	<when test=" goods_publisher!='' and goods_publisher!=null">
+		       		goods_publisher=#{goods_publisher},
+		      	</when>
+		      	<when test=" goods_price!='' and goods_price!=null">
+		        	goods_price=#{goods_price},
+		      	</when>
+		      	<when test=" goods_published_date!='' and goods_published_date!=null">
+		        	goods_published_date=#{goods_published_date},
+		      	</when>
+		      	<when test=" goods_sales_price!='' and goods_sales_price!=null">
+		        	goods_sales_price=#{goods_sales_price},
+		      	</when>
+		      	<when test=" goods_point!='' and goods_point!=null">
+		        	goods_point=#{goods_point},
+		      	</when>
+		      	<when test=" goods_page_total!='' and goods_page_total!=null">
+		        	goods_page_total=#{goods_page_total},
+		      	</when>
+		      	<when test=" goods_isbn!='' and goods_isbn!=null">
+		        	goods_isbn=#{goods_isbn},
+		      	</when>
+		      	<when test=" goods_delivery_price!='' and goods_delivery_price!=null">
+		        	goods_delivery_price=#{goods_delivery_price},
+		      	</when>
+		      	<when test=" goods_delivery_date!='' and goods_delivery_date!=null">
+		        	goods_delivery_date=#{goods_delivery_date},
+		      	</when>
+		      	<when test=" goods_status!='' and goods_status!=null">
+		        	goods_status=#{goods_status},
+		      	</when>
+		      	<when test=" goods_writer_intro!='' and goods_writer_intro!=null">
+		        	goods_writer_intro=#{goods_writer_intro},
+		      	</when>
+		      	<when test=" goods_intro!='' and goods_intro!=null">
+		        	goods_intro=#{goods_intro},
+		      	</when>
+		      	<when test=" publisher_comment!='' and publisher_comment!=null">
+		        	publisher_comment=#{publisher_comment},
+		      	</when>
+		      	<when test=" recommendation!='' and recommendation!=null">
+		        	recommendation=#{recommendation},
+			    </when>
+		      	<when test=" goods_contents_order!='' and goods_contents_order!=null">
+		        	goods_contents_order=#{goods_contents_order:VARCHAR}
+		      	</when>
+			</choose>
+		</set>
+		where
+		goods_id=#{goods_id}
+	</update>
+	
+	<update id="updateGoodsImage" parameterType="imageFileVO">
+		update t_goods_detail_image
+		set fileName=#{fileName}
+		where
+		goods_id=#{goods_id} and image_id=#{image_id}
+	</update>
 	
 	<select id="selectGoodsBySearchWord" parameterType="String" resultMap="goodsResult">
 		<![CDATA[
