@@ -23,4 +23,10 @@ public interface AdminGoodsController {
 	public ResponseEntity modifyGoodsInfo(String goods_id, String attribute, String value, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
+	public void modifyGoodsImageInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception;
+
+	public void removeGoodsImage(int goods_id, int image_id, String imageFileName, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
 }

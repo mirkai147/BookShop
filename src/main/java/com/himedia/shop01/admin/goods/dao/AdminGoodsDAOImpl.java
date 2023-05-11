@@ -37,4 +37,36 @@ public class AdminGoodsDAOImpl implements AdminGoodsDAO {
 		ArrayList<GoodsVO> goodsList = (ArrayList) sqlSession.selectList("mapper.admin.goods.selectNewGoodsList", condMap);
 		return goodsList;
 	}
+	
+	@Override
+	public GoodsVO selectGoodsDetail(int goods_id) throws DataAccessException {
+		GoodsVO goodsBean = new GoodsVO();
+		goodsBean = sqlSession.selectOne("mapper.admin.goods.selectGoodsDetail", goods_id);
+		return goodsBean;
+	}
+	
+	@Override
+	public List selectGoodsImageFileList(int goods_id) throws DataAccessException {
+		List imageList = new ArrayList();
+		imageList = sqlSession.selectList("mapper.admin.goods.selectGoodsImageFileList", goods_id);
+		return imageList;
+	}
+	
+	@Override
+	public void updateGoodsInfo(Map goodsMap) throws DataAccessException {
+		sqlSession.update("mapper.admin.goods.updateGoodsInfo", goodsMap);
+	}
+	
+	@Override
+	public void updateGoodsImage(List<ImageFileVO> imageFileList) throws DataAccessException {
+		for(int i=0; i<imageFileList.size(); i++) {
+			ImageFileVO imageFileVO = imageFileList.get(i);
+			sqlSession.update("mapper.admin.goods.updateGoodsImage", imageFileVO);
+		}
+	}
+	
+	@Override
+	public void deleteGoodsImage(int image_id) throws DataAccessException{
+		sqlSession.delete("mapper.admin.goods.deleteGoodsImage",image_id);
+	}
 }
