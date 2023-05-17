@@ -8,13 +8,13 @@
   request.setCharacterEncoding("UTF-8");
 %>  
 
-<%-- <div id="ad_main_banner">
+<div id="ad_main_banner">
 	<ul class="bjqs">	 	
 	  <li><img width="775" height="145" src="${contextPath}/resources/image/main_banner01.jpg"></li>
 		<li><img width="775" height="145" src="${contextPath}/resources/image/main_banner02.jpg"></li>
 		<li><img width="775" height="145" src="${contextPath}/resources/image/main_banner03.jpg"></li> 
 	</ul>
-</div> --%>
+</div>
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
 	<h3>베스트셀러</h3>
