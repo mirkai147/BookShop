@@ -3,6 +3,12 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+<!--  oracle null 처리  -->
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+    
 	<typeAliases>
 		<typeAlias type="com.himedia.shop01.goods.vo.GoodsVO"  alias="goodsVO" />
 		<typeAlias type="com.himedia.shop01.goods.vo.ImageFileVO"  alias="imageFileVO" />

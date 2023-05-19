@@ -9,7 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface AdminMemberController {
 
-	ModelAndView adminMemberMain(Map<String, String> dataMap, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView adminMemberMain(Map<String, String> dataMap, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
+
+	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public void modifyMemberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

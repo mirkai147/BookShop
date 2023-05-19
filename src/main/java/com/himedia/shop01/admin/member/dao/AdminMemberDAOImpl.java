@@ -21,4 +21,15 @@ public class AdminMemberDAOImpl implements AdminMemberDAO {
 		ArrayList<MemberVO> memberList = (ArrayList) sqlSession.selectList("mapper.admin.member.listMember", condMap);
 		return memberList;
 	}
+	
+	@Override
+	public MemberVO memberDetail(String member_id) throws DataAccessException{
+		MemberVO memberBean=(MemberVO)sqlSession.selectOne("mapper.admin.member.memberDetail",member_id);
+		return memberBean;
+	}
+	
+	@Override
+	public void modifyMemberInfo(HashMap memberMap) throws DataAccessException{
+		sqlSession.update("mapper.admin.member.modifyMemberInfo",memberMap);
+	}
 }

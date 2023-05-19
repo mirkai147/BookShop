@@ -9,6 +9,10 @@ import com.himedia.shop01.member.vo.MemberVO;
 
 public interface AdminMemberDAO {
 
-	ArrayList<MemberVO> listMember(HashMap condMap) throws DataAccessException;
+	public ArrayList<MemberVO> listMember(HashMap condMap) throws DataAccessException;
+
+	public MemberVO memberDetail(String member_id) throws DataAccessException;
+
+	public void modifyMemberInfo(HashMap memberMap) throws DataAccessException;
 
 }
