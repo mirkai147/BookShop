@@ -72,7 +72,7 @@ function goodsDetail(){
  
 <body>    
     <div id="sticky" >
-	<ul>
+	<%-- <ul>
 		<li><a href="#">
 		   <img	width="24" height="24" src="${contextPath}/resources/image/facebook_icon.png">
 				페이스북
@@ -85,7 +85,7 @@ function goodsDetail(){
 		   <img	width="24" height="24" src="${contextPath}/resources/image/rss_icon.png">
 				RSS 피드
 		 </a></li>
-	</ul>
+	</ul> --%>
 	<div class="recent">
 		<h3>최근 본 상품</h3>
 		  <ul>
